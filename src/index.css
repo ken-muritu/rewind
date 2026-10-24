@@ -1,0 +1,479 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* 
+  REWIND Design System
+  "Your year, distilled. Your future, designed."
+  
+  Colors:
+  - Primary: Deep Purple (#6366F1)
+  - Background: Soft Cream (#F5F5F0)
+  - Accent: Electric Lime (#C4FF61)
+  - Neutrals: Pure Black, Pure White
+*/
+
+@layer base {
+  :root {
+    /* Soft Cream Background */
+    --background: 50 33% 96%;
+    --foreground: 0 0% 0%;
+
+    /* Cards - Slightly warmer white */
+    --card: 50 33% 98%;
+    --card-foreground: 0 0% 0%;
+
+    --popover: 50 33% 98%;
+    --popover-foreground: 0 0% 0%;
+
+    /* Deep Purple Primary */
+    --primary: 239 84% 67%;
+    --primary-foreground: 0 0% 100%;
+
+    /* Secondary - Muted purple */
+    --secondary: 239 30% 92%;
+    --secondary-foreground: 239 84% 30%;
+
+    /* Muted tones */
+    --muted: 50 20% 90%;
+    --muted-foreground: 0 0% 40%;
+
+    /* Electric Lime Accent */
+    --accent: 83 100% 69%;
+    --accent-foreground: 0 0% 0%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 50 20% 85%;
+    --input: 50 20% 85%;
+    --ring: 239 84% 67%;
+
+    --radius: 0.75rem;
+
+    /* Sidebar */
+    --sidebar-background: 0 0% 0%;
+    --sidebar-foreground: 0 0% 100%;
+    --sidebar-primary: 239 84% 67%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 83 100% 69%;
+    --sidebar-accent-foreground: 0 0% 0%;
+    --sidebar-border: 0 0% 20%;
+    --sidebar-ring: 239 84% 67%;
+
+    /* Custom Rewind tokens */
+    --rewind-purple: 239 84% 67%;
+    --rewind-purple-glow: 239 84% 75%;
+    --rewind-lime: 83 100% 69%;
+    --rewind-cream: 50 33% 96%;
+    --rewind-black: 0 0% 0%;
+    --rewind-white: 0 0% 100%;
+
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(239 84% 67%), hsl(239 84% 55%));
+    --gradient-accent: linear-gradient(135deg, hsl(83 100% 69%), hsl(83 100% 55%));
+    --gradient-dark: linear-gradient(180deg, hsl(0 0% 0%), hsl(0 0% 10%));
+    --gradient-hero: linear-gradient(180deg, hsl(50 33% 96%) 0%, hsl(50 33% 92%) 100%);
+
+    /* Shadows */
+    --shadow-soft: 0 4px 20px -4px hsl(0 0% 0% / 0.1);
+    --shadow-glow: 0 0 40px hsl(239 84% 67% / 0.3);
+    --shadow-card: 0 8px 32px -8px hsl(0 0% 0% / 0.1);
+  }
+
+  .dark {
+    /* Pure Black Background */
+    --background: 0 0% 4%;
+    --foreground: 0 0% 100%;
+
+    --card: 0 0% 8%;
+    --card-foreground: 0 0% 100%;
+
+    --popover: 0 0% 8%;
+    --popover-foreground: 0 0% 100%;
+
+    /* Deep Purple Primary */
+    --primary: 239 84% 67%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 0 0% 15%;
+    --secondary-foreground: 0 0% 100%;
+
+    --muted: 0 0% 15%;
+    --muted-foreground: 0 0% 65%;
+
+    /* Electric Lime Accent */
+    --accent: 83 100% 69%;
+    --accent-foreground: 0 0% 0%;
+
+    --destructive: 0 62% 30%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 0 0% 20%;
+    --input: 0 0% 20%;
+    --ring: 239 84% 67%;
+
+    --sidebar-background: 0 0% 4%;
+    --sidebar-foreground: 0 0% 100%;
+    --sidebar-primary: 239 84% 67%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 83 100% 69%;
+    --sidebar-accent-foreground: 0 0% 0%;
+    --sidebar-border: 0 0% 20%;
+    --sidebar-ring: 239 84% 67%;
+
+    /* Dark mode gradients */
+    --gradient-hero: linear-gradient(180deg, hsl(0 0% 4%) 0%, hsl(0 0% 8%) 100%);
+    --shadow-glow: 0 0 60px hsl(239 84% 67% / 0.4);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: 'Outfit', system-ui, sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Outfit', system-ui, sans-serif;
+    @apply font-bold tracking-tight;
+  }
+
+  code, pre, .mono {
+    font-family: 'JetBrains Mono', monospace;
+  }
+}
+
+@layer components {
+  /* Film grain texture overlay */
+  .grain-overlay {
+    position: relative;
+  }
+  
+  .grain-overlay::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    opacity: 0.03;
+    pointer-events: none;
+    mix-blend-mode: overlay;
+  }
+
+  /* Wrapped card styling */
+  .wrapped-card {
+    @apply relative overflow-hidden rounded-2xl;
+    aspect-ratio: 9/16;
+    background: linear-gradient(180deg, hsl(var(--card)) 0%, hsl(var(--background)) 100%);
+  }
+
+  /* Button variants for Rewind */
+  .btn-primary {
+    @apply bg-primary text-primary-foreground hover:opacity-90 transition-all duration-300;
+  }
+
+  .btn-accent {
+    @apply bg-accent text-accent-foreground hover:opacity-90 transition-all duration-300;
+  }
+
+  .btn-outline-dark {
+    @apply border-2 border-foreground bg-transparent text-foreground hover:bg-foreground hover:text-background transition-all duration-300;
+  }
+
+  /* Animated underline link */
+  .link-underline {
+    @apply relative;
+  }
+
+  .link-underline::after {
+    content: '';
+    @apply absolute bottom-0 left-0 w-full h-0.5 bg-primary origin-bottom-right scale-x-0 transition-transform duration-300;
+  }
+
+  .link-underline:hover::after {
+    @apply origin-bottom-left scale-x-100;
+  }
+}
+
+@layer utilities {
+  /* Text gradient utility */
+  .text-gradient-primary {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--rewind-purple-glow)));
+  }
+
+  .text-gradient-accent {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(135deg, hsl(var(--accent)), hsl(83 100% 55%));
+  }
+
+  /* Glow effects */
+  .glow-primary {
+    box-shadow: 0 0 40px hsl(var(--primary) / 0.3);
+  }
+
+  .glow-accent {
+    box-shadow: 0 0 40px hsl(var(--accent) / 0.4);
+  }
+
+  /* Animations */
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  .animate-pulse-slow {
+    animation: pulse 4s ease-in-out infinite;
+  }
+
+  .animate-slide-up {
+    animation: slideUp 0.6s ease-out forwards;
+  }
+
+  .animate-fade-in {
+    animation: fadeIn 0.5s ease-out forwards;
+  }
+
+  .animate-scale-in {
+    animation: scaleIn 0.4s ease-out forwards;
+  }
+
+  /* Stagger delays for sequential animations */
+  .delay-100 { animation-delay: 100ms; }
+  .delay-200 { animation-delay: 200ms; }
+  .delay-300 { animation-delay: 300ms; }
+  .delay-400 { animation-delay: 400ms; }
+  .delay-500 { animation-delay: 500ms; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-20px); }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-muted;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-muted-foreground/30 rounded-full;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-muted-foreground/50;
+}
+
+/* Hide scrollbar utility */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* Mobile-first touch improvements */
+@media (max-width: 640px) {
+  /* Larger touch targets on mobile */
+  button, a, [role="button"] {
+    min-height: 44px;
+  }
+  
+  /* Better text sizing on mobile */
+  html {
+    font-size: 16px;
+    -webkit-text-size-adjust: 100%;
+  }
+  
+  /* Prevent horizontal scroll */
+  body {
+    overflow-x: hidden;
+  }
+  
+  /* Safe area padding for notched devices */
+  .safe-area-bottom {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+  
+  .safe-area-top {
+    padding-top: env(safe-area-inset-top);
+  }
+}
+
+/* Improve tap highlight on mobile */
+@media (hover: none) {
+  button, a, [role="button"] {
+    -webkit-tap-highlight-color: transparent;
+  }
+}
+
+/* Focus visible for accessibility */
+:focus-visible {
+  @apply outline-2 outline-offset-2 outline-primary;
+}
+
+/* Print Styles */
+@media print {
+  /* Hide non-essential elements */
+  .no-print,
+  header,
+  nav,
+  button,
+  .print\\:hidden {
+    display: none !important;
+  }
+
+  /* Reset backgrounds and colors for print */
+  body {
+    background: white !important;
+    color: black !important;
+    font-size: 12pt;
+    line-height: 1.5;
+  }
+
+  /* Print-friendly container */
+  .print-container {
+    padding: 0 !important;
+    margin: 0 !important;
+    max-width: 100% !important;
+  }
+
+  /* Print header styling */
+  .print-header {
+    display: block !important;
+    text-align: center;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid #6366F1;
+  }
+
+  .print-header h1 {
+    font-size: 24pt !important;
+    color: #6366F1 !important;
+    margin: 0;
+  }
+
+  .print-header p {
+    font-size: 10pt;
+    color: #666;
+    margin-top: 0.5rem;
+  }
+
+  /* Blueprint content print styles */
+  .print-content {
+    background: white !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+  }
+
+  .print-content h1 {
+    font-size: 18pt !important;
+    color: black !important;
+    margin-top: 1.5rem;
+    margin-bottom: 0.5rem;
+    page-break-after: avoid;
+  }
+
+  .print-content h2 {
+    font-size: 14pt !important;
+    color: #6366F1 !important;
+    margin-top: 1.25rem;
+    margin-bottom: 0.5rem;
+    page-break-after: avoid;
+  }
+
+  .print-content h3 {
+    font-size: 12pt !important;
+    color: #333 !important;
+    margin-top: 1rem;
+    margin-bottom: 0.25rem;
+    page-break-after: avoid;
+  }
+
+  .print-content p,
+  .print-content li {
+    font-size: 11pt !important;
+    color: #333 !important;
+    orphans: 3;
+    widows: 3;
+  }
+
+  .print-content li {
+    margin-left: 1.5rem;
+    margin-bottom: 0.25rem;
+  }
+
+  /* Page break controls */
+  h2, h3 {
+    page-break-after: avoid;
+  }
+
+  p, li {
+    page-break-inside: avoid;
+  }
+
+  /* Print footer */
+  .print-footer {
+    display: block !important;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    text-align: center;
+    font-size: 8pt;
+    color: #999;
+    padding: 0.5rem;
+    border-top: 1px solid #eee;
+  }
+
+  /* Hide gradient header in print */
+  .print\\:bg-white {
+    background: white !important;
+    color: black !important;
+  }
+}
